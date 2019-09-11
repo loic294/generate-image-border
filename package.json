@@ -1,30 +1,33 @@
 {
   "name": "photo-borders",
+  "author": "Loïc Bellemare-Alford",
+  "description": "A simple Electron app to generate borders around images to use for video editing (Premiere Pro)",
   "version": "0.1.0",
-  "private": true,
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/loic294/generate-image-border"
+  },
+  "private": false,
   "dependencies": {
     "@ionic/react": "^4.8.0-rc.1",
     "@uifabric/icons": "^7.2.0",
     "@uifabric/react-cards": "^0.108.1",
     "copy-to-clipboard": "^3.2.0",
     "electron-is-dev": "^1.1.0",
-    "electron-sharp": "^0.20.8",
-    "jimp": "^0.8.0",
     "office-ui-fabric-react": "^7.31.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-dropzone": "^10.1.8",
-    "sharp": "^0.23.0",
-    "wait-on": "^3.3.0"
+    "react-dropzone": "^10.1.8"
   },
   "devDependencies": {
     "concurrently": "^4.1.2",
     "electron": "7.0.0-beta.4",
     "electron-builder": "^21.2.0",
     "electron-rebuild": "^1.8.6",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "wait-on": "^3.3.0"
   },
-  "main": "Main.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
     "start": "react-scripts start",
@@ -33,9 +36,8 @@
     "eject": "react-scripts eject",
     "electron-start": "ELECTRON_DEV=1 electron .",
     "dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "preelectron-pack": "npm run build",
-    "electron-pack": "electron-builder build --win --macos -c.extraMetadata.main=build/Main.js",
-    "rebuild": "electron-rebuild -f -w sharp"
+    "preelectron-pack": "yarn build",
+    "electron-pack": "electron-builder build --macos --win --c.extraMetadata.main=build/electron.js -c.snap.publish=github --publish always"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -53,7 +55,7 @@
     ]
   },
   "build": {
-    "appId": "nonExistentID",
+    "appId": "com.photo-border-app.lba",
     "electronVersion": "7.0.0-beta.4",
     "files": [
       "build/**/*",
